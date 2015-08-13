@@ -10,7 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
-import gob.pe.proc.capaacccesodatos.InstanciaDAO;
 import gob.pe.proc.capaacccesodatos.ProcesoDAO;
 import gob.pe.proc.capadatos.Estado;
 import gob.pe.proc.capadatos.Materia;
@@ -23,8 +22,6 @@ public class ProcesoServiceImpl implements ProcesoService {
 	@Autowired
 	private ProcesoDAO procesoDAO;
 	
-	private InstanciaDAO instanciaDAO;
-
 	public Set<Proceso> obtenerListaProceso(Proceso proceso) {
 		return procesoDAO.obtenerListaProceso(proceso);
 	}
