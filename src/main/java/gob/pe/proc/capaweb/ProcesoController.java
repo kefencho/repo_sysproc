@@ -147,7 +147,6 @@ public class ProcesoController {
 			if(result.hasErrors()){
 				return "addProceso";
 			}
-			ModelAndView resultado=new ModelAndView();
 			Set<Demandado>guardarListaDemandado=new HashSet<Demandado>();
 			Set<Demandante>guardarListaDemandante=new HashSet<Demandante>();
 			procesoguardar.setNroExpediente(procesoguardar.getComponenteUnoNroExpediente().toString()+"-"+
@@ -170,48 +169,9 @@ public class ProcesoController {
 			procesoguardar.setDemandado(guardarListaDemandado);
 			procesoguardar.setDemandante(guardarListaDemandante);
 			model.addAttribute("datosProceso", procesoguardar);
-			//procesoService.guardarProceso(procesoguardar);
 			return "redirect:/addInstancia.htm?idDependecia="+idDependecia;
-			
-//			if(nroExpedienteActual==null || nroExpedienteActual.equals("")||nroExpedienteActual.length()<0){
-//				return "redirect:/addInstancia.htm?nroExpedienteActual="+procesoguardar.getNroExpediente();
-//			}
-//			return "redirect:/addInstancia.htm?nroExpedienteActual="+nroExpedienteActual+"&idDependecia="+idDependecia;
 		
 	}
-	
-/*	@RequestMapping(value="/addProceso.htm",method=RequestMethod.POST)
-	public ModelAndView guardarProceso(@ModelAttribute("procesoGuardar")@Valid Proceso procesoguardar,BindingResult result){
-		ModelAndView resultado=new ModelAndView();
-			if(result.hasErrors()){
-				return resultado.addObject("addProceso");
-			}
-			Set<Demandado>guardarListaDemandado=new HashSet<Demandado>();
-			Set<Demandante>guardarListaDemandante=new HashSet<Demandante>();
-			procesoguardar.setNroExpediente(procesoguardar.getComponenteUnoNroExpediente().toString()+"-"+
-					procesoguardar.getComponenteDosNroExpediente().trim()+"-"+
-					procesoguardar.getComponenteTresNroExpediente().trim()+"-"+
-					procesoguardar.getComponenteCuatroNroExpediente().trim()+"-"+
-					procesoguardar.getComponenteCincoNroExpediente().trim()+"-"+
-					procesoguardar.getComponenteSeisNroExpediente().trim()+"-"+
-					procesoguardar.getComponenteSieteNroExpediente().trim());
-			guardarListaDemandado.addAll(procesoguardar.getNuevoDemandado());
-			guardarListaDemandante.addAll(procesoguardar.getNuevoDemandante());
-			
-			for (Demandado demandado : guardarListaDemandado) {
-				demandado.setProceso(procesoguardar);
-			}
-			for (Demandante demandante : guardarListaDemandante) {
-				demandante.setProceso(procesoguardar);
-			}
-			
-			procesoguardar.setDemandado(guardarListaDemandado);
-			procesoguardar.setDemandante(guardarListaDemandante);
-			resultado.setViewName("addInstancia");
-			resultado.addObject("datosProceso", procesoguardar);
-			return resultado;
-		
-	}*/
 	
 	@RequestMapping(value="/borrarProceso.htm")
 	public String borrarProceso(Model model,@RequestParam(value="numExpediente",required=false)String numExpediente){

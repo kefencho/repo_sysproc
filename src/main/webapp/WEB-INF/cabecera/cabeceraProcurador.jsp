@@ -9,8 +9,8 @@
 <body>
 	<div id="contenedorCabecera">
 		<div class="enlacesCabecera">
-			<a href="inicio.htm">Inicio</a>|<a href="#">Abogados</a>|<a
-				href="#">Aniversarios</a>|<a href="#">Practicantes</a>|<a
+			<a href="inicio.htm">Inicio</a>|<a href="construccion.htm">Abogados</a>|<a
+				href="construccion.htm">Aniversarios</a>|<a href="construccion.htm">Practicantes</a>|<a
 				href="logout.htm">Salir</a>
 		</div>
 	</div>

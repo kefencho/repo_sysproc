@@ -32,6 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SessionAttributes({"datosUsuario"})
@@ -179,5 +180,10 @@ public class UsuarioController {
 	@RequestMapping("/logout.htm")
 	public String logoutUsuario(Model model){
 		return "redirect:j_spring_security_logout";
+	}
+	
+	@RequestMapping("/construccion.htm")
+	public ModelAndView enConstruccion(){
+		return new ModelAndView("error/construccion");
 	}
 }

@@ -105,11 +105,17 @@
 							<li>
 								<label class="label">Fecha de Inicio:</label> 
 								<form:input type="text" id="datepicker"  size="10" path="fechaInicio" class="input_date" />
+								<font color="#FF0000">
+									<form:errors path="fechaInicio" />
+								</font>
 							</li>
 							
 							<li>
 								<label class="label">Fecha Fin:</label> 
 								<form:input type="text" id="datepicker1"  size="10" path="fechaFin" class="input_date" />
+								<font color="#FF0000">
+									<form:errors path="fechaFin" />
+								</font>
 							</li>
 							
 						</ol>

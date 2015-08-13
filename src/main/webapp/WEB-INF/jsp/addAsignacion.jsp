@@ -32,6 +32,7 @@ $(function() {
 			buttonImage: "images/calendar.gif",
 			buttonImageOnly: true
 		});
+		$("#datepicker").datepicker().datepicker("setDate", new Date());
 	});
 </script>
 <title>Asignar Carga Laboral</title>
