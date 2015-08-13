@@ -77,10 +77,6 @@
 								</th>
 							</tr>	
 						</table>
-						
-		
-
-fasfasfasfasfasfasasasfasfasfas
 						<table border="0">
 							<tr>
 								<th>

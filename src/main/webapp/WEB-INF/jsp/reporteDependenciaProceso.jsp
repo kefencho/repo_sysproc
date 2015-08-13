@@ -30,12 +30,20 @@
 		$( "#datepicker" ).datepicker({
 			showOn: "button",
 			buttonImage: "images/calendar.gif",
-			buttonImageOnly: true
+			buttonImageOnly: true,
+			dateFormat: 'dd/mm/yy', 
+			changeMonth: true, 
+			changeYear: true, 
+			yearRange: '-100:+0'
 		});
 		$( "#datepicker1" ).datepicker({
 			showOn: "button",
 			buttonImage: "images/calendar.gif",
-			buttonImageOnly: true
+			buttonImageOnly: true,
+			dateFormat: 'dd/mm/yy', 
+			changeMonth: true, 
+			changeYear: true, 
+			yearRange: '-100:+0'
 		});
 	});
 	</script>
@@ -76,7 +84,7 @@
 						<br>
 						<div>
 							<fieldset id="formFielset">
-								<label id="label_titulo_pestanas">Reporte de Procesos Judiciales por Ubigeo</label>
+								<label id="label_titulo_pestanas">Reporte de Procesos Judiciales por Dependencia</label>
 							</fieldset>
 						</div>
 						
@@ -86,7 +94,7 @@
 						<ol>
 							<li>
 								<label class="label">Organo Judicial:</label> 
-								<form:select id="idOrganoJudicial" path="" class="combo_uno">
+								<form:select id="idOrganoJudicial" path="id.dependencia.organojudicial.idOrganojudicial" class="combo_uno">
 									<form:options items="${organosJudiciales}" itemLabel="denominacion" itemValue="idOrganojudicial" />
 								</form:select>
 							</li>
@@ -106,11 +114,24 @@
 							<li>
 								<label class="label">Fecha de Inicio:</label> 
 								<form:input type="text" id="datepicker" maxlength="10" path="id.proceso.fechaInicio" class="input_date" />
+								<font color="#FF0000">
+									<form:errors path="id.proceso.fechaInicio" />
+								</font>
 							</li>
 							
 							<li>
 								<label class="label">Fecha Fin:</label> 
-									<form:input type="text" id="datepicker1"  maxlength="10" path="id.proceso.fechaFin" class="input_date" />
+								<form:input type="text" id="datepicker1"  maxlength="10" path="id.proceso.fechaFin" class="input_date" />
+								<font color="#FF0000">
+									<form:errors path="id.proceso.fechaFin" />
+								</font>
+							</li>
+							<li>
+								<c:if test="${not empty error}">
+								<font color="#FF0000">
+									<c:out value="${error}"/>
+								</font>
+								</c:if>
 							</li>
 						</ol>
 						
@@ -137,16 +158,7 @@
 </script>
 		</div>
 		<!-- FIN Cuerpo -->
-		<div id="contenedorFooter">
-			<div class="piePagina" align="center">
-				<p>
-					Direcci&oacute;n: Jr. Asamblea Nro. 2xx (Entel)- Ayacucho <br>
-					Telf: 066-310000 | <a href="http://www.ppra.gob.pe"
-						target="_parent">www.procuraduria-ayacucho.gob.pe</a> | Copyright
-					&copy; SysProc - 2012
-				</p>
-			</div>
-		</div>
+		<jsp:include page="/WEB-INF/pie/pie.jsp" />
 		<!-- FIN footer -->
 	</div>
 	<!-- FIN Contenedor PRINCIPAL -->

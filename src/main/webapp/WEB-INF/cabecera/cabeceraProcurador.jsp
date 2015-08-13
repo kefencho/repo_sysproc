@@ -37,7 +37,7 @@
 						<li><a href='reporteUbigeoProceso.htm'><span>Por Ubigeo</span></a></li>
 						<li><a href='reporteDependenciaProceso.htm'><span>Por Dependencia</span></a></li>
 					</ul></li>
-				<li><a href='contactenos.jsp'><span>Cont&#225;ctenos</span></a></li>
+				<li><a href='construccion.htm'><span>Cont&#225;ctenos</span></a></li>
 			</ul>
 		</div>
 		<!-- FIN css Menu -->

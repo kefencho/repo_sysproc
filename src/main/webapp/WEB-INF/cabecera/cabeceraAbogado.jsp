@@ -34,28 +34,8 @@
 			<ul>
 				<li><a href='inicio.htm'><span>Principal</span></a></li>
 				<li><a href='listadoNotificaciones.htm?doc=1'><span>Registrar Audiencia</span></a></li>
-				<li><a href='listadoNotificaciones.htm?doc=2'><span>Registrar Escrito</span></a></li>
-				<!--  
-				<li class='has-sub '><a href='#'><span>Buscar Expediente</span></a>
-					
-					<ul>
-						<li><a href='procesoList.htm'><span>N&#250;mero de Expediente</span></a></li>
-						<li><a href='busquedaDemandante.htm'><span>Demandante</span></a></li>
-						<li><a href='busquedaDemandado.htm'><span>Demandado</span></a></li>
-						<li><a href='busquedaFolder.htm'><span>N&#250;mero Folder</span></a></li>
-						<li><a href='busquedaNotificacion.htm'><span>Notificaci&#243;n</span></a></li>
-					</ul>
-				</li>
-				
-				<li class='has-sub '><a href='#'><span>Buscar Notificaci&#243;n</span></a>
-					<ul>
-						<li><a href='listarNotificacionEscrito.htm'><span>Registrar Escrito</span></a></li>
-						<li><a href='listarNotificacionAudiencia.htm'><span>Registrar Audiencia</span></a></li>
-					</ul>
-				</li>
-				-->
-				
-				<li><a href='contactenos.jsp'><span>Cont&#225;ctenos</span></a></li>
+				<li><a href='listadoNotificaciones.htm?doc=2'><span>Registrar Escrito</span></a></li>				
+				<li><a href='construccion.htm'><span>Cont&#225;ctenos</span></a></li>
 			</ul>
 		</div>
 		<!-- FIN css Menu -->

@@ -1,6 +1,5 @@
 package gob.pe.proc.capaweb;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -30,15 +29,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @SessionAttributes("datosProceso")
 public class ProcesoController {
 	@Autowired
 	private ProcesoService procesoService;
-	@Autowired
-	private ProcesoValidador procesoValidador;
+
 	
 	private static final Logger logger=Logger.getLogger(ProcesoController.class);
 	
@@ -90,7 +87,6 @@ public class ProcesoController {
 	
 	@RequestMapping("/reporteExpedienteGuardado.htm")
 	public @ModelAttribute("ultimoProceso")Proceso procesolista(Model model,@RequestParam(value="nroExpedienteActual",required=false)String nroExpedienteActual,@ModelAttribute("datosProceso")Proceso procesoGuardado){
-		//Set<Proceso> listaProceso=procesoService.obtenerUltimaTupla();
 		Proceso ultimoProcesoCreado=procesoService.obtenerProcesoporId(procesoGuardado.getNroExpediente());
 		Set<Demandante> listaDemandantes = new HashSet<Demandante>();
 		Set<Demandado> listaDemandados=new HashSet<Demandado>();
@@ -108,7 +104,6 @@ public class ProcesoController {
 
 	@SuppressWarnings("unchecked")
 	@RequestMapping(value="/addProceso.htm",method=RequestMethod.GET)
-	//public ModelAndView get(Model model,@RequestParam(value="numExpediente",required=false)String nroExpediente){
 	public @ModelAttribute("procesoGuardar")Proceso procesonuevo(Model model,@RequestParam(value="numExpediente",required=false)String nroExpediente){
 		
 			nroExpedienteActual=nroExpediente;
@@ -145,6 +140,7 @@ public class ProcesoController {
 	@RequestMapping(value="/addProceso.htm",method=RequestMethod.POST)
 	public String guardarProceso(@ModelAttribute("procesoGuardar")@Valid Proceso procesoguardar,BindingResult result,Model model){
 			if(result.hasErrors()){
+				model.addAttribute("datosProceso", procesoguardar);
 				return "addProceso";
 			}
 			Set<Demandado>guardarListaDemandado=new HashSet<Demandado>();

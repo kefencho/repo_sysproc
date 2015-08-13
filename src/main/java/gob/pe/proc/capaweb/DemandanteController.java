@@ -38,7 +38,7 @@ public class DemandanteController {
 	String nroExpedienteActualEnviadoProceso="";
 	@RequestMapping("/demandanteList.htm")
 	public void demandanteList(Model model,@ModelAttribute("demandanteBuscar") Demandante demandante,@RequestParam(value="nroExpedienteActual",required=false)String nroExpedienteActual) {
-		nroExpedienteActualEnviadoProceso=nroExpedienteActual;
+		nroExpedienteActual=(nroExpedienteActual.equalsIgnoreCase(""))?nroExpedienteActualEnviadoProceso:nroExpedienteActual;
 		List<Demandante> listaDemandantes = demandanteService.obtenerListaDemandantePorNumeroExpediente(nroExpedienteActual);
 		String ultimo=demandanteService.obtenerUltimoProceso();
 		model.addAttribute("listaDemandantes", listaDemandantes);
@@ -60,6 +60,7 @@ public class DemandanteController {
 	public @ModelAttribute("demandanteGuardar") Demandante demandante(@RequestParam(value="idDemandante",required=false)Integer idDemandante) {
 		if(idDemandante!=null){
 			Demandante demandante=demandanteService.obtenerDemandanteporId(idDemandante);
+			nroExpedienteActualEnviadoProceso=demandante.getProceso().getNroExpediente();
 			return demandante;
 		}
 		return new Demandante();
@@ -70,9 +71,8 @@ public class DemandanteController {
 		if(result.hasErrors()){
 			return "addDemandante";
 		}
-			demandanteService.guardarDemandante(demandante);
-			return "redirect:/demandanteList.htm?nroExpedienteActual="+nroExpedienteActualEnviadoProceso;
-			//return "redirect:/addInstancia.htm?nroExpedienteActual="+nroExpedienteActualEnviadoProceso;
+		demandanteService.guardarDemandante(demandante);
+		return "redirect:/demandanteList.htm?nroExpedienteActual="+nroExpedienteActualEnviadoProceso;
 	}
 	@RequestMapping(value="/borrarDemandante.htm")
 	public String borrarDemandante(Model model,@RequestParam(value="idDemandante",required=false)Integer idDemandante){

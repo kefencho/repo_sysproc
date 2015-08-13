@@ -30,12 +30,20 @@
 		$( "#datepicker" ).datepicker({
 			showOn: "button",
 			buttonImage: "images/calendar.gif",
-			buttonImageOnly: true
+			buttonImageOnly: true,
+			dateFormat: 'dd/mm/yy', 
+			changeMonth: true, 
+			changeYear: true, 
+			yearRange: '-100:+0'
 		});
 		$( "#datepicker1" ).datepicker({
 			showOn: "button",
 			buttonImage: "images/calendar.gif",
-			buttonImageOnly: true
+			buttonImageOnly: true,
+			dateFormat: 'dd/mm/yy', 
+			changeMonth: true, 
+			changeYear: true, 
+			yearRange: '-100:+0'
 		});
 	});
 	</script>
@@ -47,7 +55,11 @@
 <script language="javascript" src="script/jquery.cascade.js"></script>
 <script language="javascript" src="script/jquery.cascade.ext.js"></script>
 <script language="javascript" src="script/jquery.templating.js"></script>
-
+<!-- Inicio Archivos para alertas -->
+<script type="text/javascript" src="script/alertify/lib/alertify.js"></script>
+<link rel="stylesheet" href="script/alertify/themes/alertify.core.css" />
+<link rel="stylesheet" href="script/alertify/themes/alertify.default.css" />
+<!-- Fin Archivos para alertas -->
 <script type="text/javascript">
  	function commonTemplate(item) {
  		return "<option value='" + item.Value + "'>" + item.Text + "</option>";
@@ -55,6 +67,7 @@
  	function commonMatch(selectedValue) {
  		return this.When == selectedValue;
  	};
+ 	
 </script>
 
 </head>
@@ -85,7 +98,7 @@
 						<ol>
 							<li>
 								<label class="label">Tipo de Naturaleza:</label> 
-								<form:select id="idNaturaleza" path="" class="combo_uno">
+								<form:select id="idNaturaleza" path="materia.naturaleza.idNaturaleza" class="combo_uno">
 									<form:options items="${tipoNaturaleza}" itemLabel="denominacion" itemValue="idNaturaleza" />
 								</form:select>
 							</li>
@@ -117,6 +130,13 @@
 									<form:errors path="fechaFin" />
 								</font>
 							</li>
+							<li>
+								<c:if test="${not empty error}">
+								<font color="#FF0000">
+									<c:out value="${error}"/>
+								</font>
+								</c:if>
+							</li>
 							
 						</ol>
 						
@@ -129,16 +149,7 @@
 			</form:form>
 		</div>
 		<!-- FIN Cuerpo -->
-		<div id="contenedorFooter">
-			<div class="piePagina" align="center">
-				<p>
-					Direcci&oacute;n: Jr. Asamblea Nro. 2xx (Entel)- Ayacucho <br>
-					Telf: 066-310000 | <a href="http://www.ppra.gob.pe"
-						target="_parent">www.procuraduria-ayacucho.gob.pe</a> | Copyright
-					&copy; SysProc - 2012
-				</p>
-			</div>
-		</div>
+		<jsp:include page="/WEB-INF/pie/pie.jsp" />
 		<!-- FIN footer -->
 	</div>
 	<!-- FIN Contenedor PRINCIPAL -->

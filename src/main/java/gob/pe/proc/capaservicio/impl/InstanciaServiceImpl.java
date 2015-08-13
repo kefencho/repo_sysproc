@@ -8,6 +8,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import gob.pe.proc.capaacccesodatos.InstanciaDAO;
 import gob.pe.proc.capadatos.Dependencia;
@@ -47,14 +48,20 @@ public class InstanciaServiceImpl implements InstanciaService {
 	}
 
 	public JRDataSource reporteInstanciaUbigeo(Instancia instancia) {
+		JRDataSource ds=null;
 		Set<Instancia> reporteInstanciaUbigeo=instanciaDAO.reporteInstanciaUbigeo(instancia);
-		JRDataSource ds=new JRBeanCollectionDataSource(reporteInstanciaUbigeo);	
+		if(!CollectionUtils.isEmpty(reporteInstanciaUbigeo)){
+			ds=new JRBeanCollectionDataSource(reporteInstanciaUbigeo);	
+		}
 		return ds;
 	}
 
 	public JRDataSource reporteDependenciaInstancia(Instancia instancia) {
+		JRDataSource ds=null;
 		Set<Instancia> reporteInstanciaDependencia=instanciaDAO.reporteDependenciaInstancia(instancia);
-		JRDataSource ds=new JRBeanCollectionDataSource(reporteInstanciaDependencia);	
+		if(!CollectionUtils.isEmpty(reporteInstanciaDependencia)){
+			ds=new JRBeanCollectionDataSource(reporteInstanciaDependencia);	
+		}
 		return ds;
 	}
 

@@ -34,8 +34,6 @@ public class InstanciaController {
 	@Autowired
 	private InstanciaService instanciaService;
 	@Autowired
-	private DemandadoService demandadoService;
-	@Autowired
 	private ProcesoService procesoService;
 	@Autowired
 	private DependenciaService dependenciaService;

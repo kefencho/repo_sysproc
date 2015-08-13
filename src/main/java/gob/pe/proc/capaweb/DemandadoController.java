@@ -38,7 +38,7 @@ public class DemandadoController {
 	String nroExpedienteActualEnviadoProceso="";
 	@RequestMapping("/demandadoList.htm")
 	public void demandadoList(Model model,@ModelAttribute("demandadoBuscar") Demandado demandado,@RequestParam(value="nroExpedienteActual",required=false)String nroExpedienteActual) {
-		nroExpedienteActualEnviadoProceso=nroExpedienteActual;
+		nroExpedienteActual=(nroExpedienteActual==null || nroExpedienteActual.equalsIgnoreCase(""))?nroExpedienteActualEnviadoProceso:nroExpedienteActual;
 		List<Demandado> listaDemandados = demandadoService.obtenerListaDemandadoPorNumeroExpediente(nroExpedienteActual);
 		String ultimo=demandadoService.obtenerUltimoProceso();
 		model.addAttribute("listaDemandados", listaDemandados);
@@ -60,6 +60,7 @@ public class DemandadoController {
 	public @ModelAttribute("demandadoGuardar") Demandado demandado(@RequestParam(value="idDemandado",required=false)Integer idDemandado,@RequestParam(value="nroExpedienteActual",required=false)String nroExpedienteActual) {
 		if(idDemandado!=null){
 			Demandado demandado=demandadoService.obtenerDemandadoporId(idDemandado);
+			nroExpedienteActualEnviadoProceso=demandado.getProceso().getNroExpediente();
 			return demandado;
 		}else if(nroExpedienteActual!=null){
 			Demandado demandado=new Demandado();

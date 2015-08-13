@@ -29,12 +29,20 @@
 		$( "#datepicker" ).datepicker({
 			showOn: "button",
 			buttonImage: "images/calendar.gif",
-			buttonImageOnly: true
+			buttonImageOnly: true,
+			dateFormat: 'dd/mm/yy', 
+			changeMonth: true, 
+			changeYear: true, 
+			yearRange: '-100:+0'
 		});
 		$( "#datepicker1" ).datepicker({
 			showOn: "button",
 			buttonImage: "images/calendar.gif",
-			buttonImageOnly: true
+			buttonImageOnly: true,
+			dateFormat: 'dd/mm/yy', 
+			changeMonth: true, 
+			changeYear: true, 
+			yearRange: '-100:+0'
 		});
 	});
 	</script>
@@ -82,7 +90,7 @@
 						<ol>
 							<li>
 								<label class="label">Tipo de Naturaleza:</label> 
-								<form:select id="idNaturaleza" path="" class="combo_uno" >
+								<form:select id="idNaturaleza" path="id.proceso.materia.naturaleza.idNaturaleza" class="combo_uno" >
 									<form:options items="${tipoNaturaleza}" itemLabel="denominacion" itemValue="idNaturaleza" />
 								</form:select>
 							</li>
@@ -118,10 +126,16 @@
 								<label class="label">Fecha Fin:</label> 
 								<form:input type="text"	id="datepicker1" maxlength="10" path="id.proceso.fechaFin" class="input_date"/>
 								<font color="#FF0000">
-									<form:errors path="id.proceso.fechaInicio" />
+									<form:errors path="id.proceso.fechaFin" />
 								</font>
 							</li>
-							
+							<li>
+								<c:if test="${not empty error}">
+								<font color="#FF0000">
+									<c:out value="${error}"/>
+								</font>
+								</c:if>
+							</li>
 						</ol>
 						
 						<p align="center">
@@ -133,16 +147,7 @@
 			</form:form>
 		</div>
 		<!-- FIN Cuerpo -->
-		<div id="contenedorFooter">
-			<div class="piePagina" align="center">
-				<p>
-					Direcci&oacute;n: Jr. Asamblea Nro. 2xx (Entel)- Ayacucho <br>
-					Telf: 066-310000 | <a href="http://www.ppra.gob.pe"
-						target="_parent">www.procuraduria-ayacucho.gob.pe</a> | Copyright
-					&copy; SysProc - 2012
-				</p>
-			</div>
-		</div>
+		<jsp:include page="/WEB-INF/pie/pie.jsp" />
 		<!-- FIN footer -->
 	</div>
 	<!-- FIN Contenedor PRINCIPAL -->

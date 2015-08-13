@@ -8,6 +8,7 @@ import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 
 import gob.pe.proc.capaacccesodatos.InstanciaDAO;
 import gob.pe.proc.capaacccesodatos.ProcesoDAO;
@@ -63,14 +64,20 @@ public class ProcesoServiceImpl implements ProcesoService {
 	}
 
 	public JRDataSource reporteEstadoProceso(Proceso proceso) {
+		JRDataSource ds=null;
 		Set<Proceso> reporteEstadoProceso=procesoDAO.reporteEstadoProceso(proceso);
-		JRDataSource ds=new JRBeanCollectionDataSource(reporteEstadoProceso);
+		if(!CollectionUtils.isEmpty(reporteEstadoProceso)){
+			ds=new JRBeanCollectionDataSource(reporteEstadoProceso);
+		}
 		return ds;
 	}
 
 	public JRDataSource reporteMateriaProceso(Proceso proceso) {
+		JRDataSource ds=null;
 		Set<Proceso> reporteMateriaProceso=procesoDAO.reporteMateriaProceso(proceso);
-		JRDataSource ds=new JRBeanCollectionDataSource(reporteMateriaProceso);	
+		if(!CollectionUtils.isEmpty(reporteMateriaProceso)){
+			ds=new JRBeanCollectionDataSource(reporteMateriaProceso);	
+		}
 		return ds;
 	}
 

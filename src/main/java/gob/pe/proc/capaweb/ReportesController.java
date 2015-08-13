@@ -8,6 +8,7 @@ import gob.pe.proc.capadatos.Proceso;
 import gob.pe.proc.capadatos.Ubigeo;
 import gob.pe.proc.capaservicio.InstanciaService;
 import gob.pe.proc.capaservicio.ProcesoService;
+import gob.pe.proc.validadores.ReporteInstanciaValidador;
 import gob.pe.proc.validadores.ReporteValidador;
 
 import java.util.HashMap;
@@ -56,7 +57,12 @@ public class ReportesController {
 	
 	@InitBinder("ubigeoInstancia")
 	public void reportePorUbigeo(WebDataBinder binder) {
-		binder.setValidator(new ReporteValidador());
+		binder.setValidator(new ReporteInstanciaValidador());
+	}
+	
+	@InitBinder("dependenciaInstancia")
+	public void reportePorDependencia(WebDataBinder binder) {
+		binder.setValidator(new ReporteInstanciaValidador());
 	}
 	
 	private static final Logger logger=Logger.getLogger(ReportesController.class);
@@ -71,9 +77,15 @@ public class ReportesController {
 			return new ModelAndView("reporteEstadoProceso");
 		}
     	JRDataSource datasource=procesoService.reporteEstadoProceso(proceso);
-    	Map<String,Object> parameterMap = new HashMap<String,Object>();
-		parameterMap.put("datasource", datasource);
-		modelAndView = new ModelAndView("pdfReportEstado", parameterMap);
+    	if(datasource!=null){
+    		Map<String,Object> parameterMap = new HashMap<String,Object>();
+    		parameterMap.put("datasource", datasource);
+    		modelAndView = new ModelAndView("pdfReportEstado", parameterMap);
+    	}else{
+    		modelAndView = new ModelAndView("reporteEstadoProceso");
+    		modelAndView.addObject("error", "No se encontraron Resultados");
+    	}
+    	
 		return modelAndView;
 	}
     @RequestMapping(value = "/reporteMateriaProceso", method = RequestMethod.GET)
@@ -86,9 +98,15 @@ public class ReportesController {
 			return new ModelAndView("reporteMateriaProceso");
 		}
     	JRDataSource datasource=procesoService.reporteMateriaProceso(proceso);
-    	Map<String,Object> parameterMap = new HashMap<String,Object>();
-		parameterMap.put("datasource", datasource);
-		modelAndView = new ModelAndView("pdfReportMateria", parameterMap);
+    	if(datasource!=null){
+    		Map<String,Object> parameterMap = new HashMap<String,Object>();
+    		parameterMap.put("datasource", datasource);
+    		modelAndView = new ModelAndView("pdfReportMateria", parameterMap);
+    	}else{
+    		modelAndView = new ModelAndView("reporteMateriaProceso");
+    		modelAndView.addObject("error", "No se encontraron Resultados");    		
+    	}
+
 		return modelAndView;
 	}
     @RequestMapping(value = "/reporteUbigeoProceso", method = RequestMethod.GET)
@@ -101,9 +119,15 @@ public class ReportesController {
 			return new ModelAndView("reporteUbigeoProceso");
 		}
     	JRDataSource datasource=instanciaService.reporteInstanciaUbigeo(instancia);
-    	Map<String,Object> parameterMap = new HashMap<String,Object>();
-		parameterMap.put("datasource", datasource);
-		modelAndView = new ModelAndView("pdfReportUbigeo", parameterMap);
+    	if(datasource!=null){
+    		Map<String,Object> parameterMap = new HashMap<String,Object>();
+    		parameterMap.put("datasource", datasource);
+    		modelAndView = new ModelAndView("pdfReportUbigeo", parameterMap);
+    	}else{
+    		modelAndView = new ModelAndView("reporteUbigeoProceso");
+    		modelAndView.addObject("error", "No se encontraron Resultados");
+    	}
+    	
 		return modelAndView;
 	}
     
@@ -115,12 +139,18 @@ public class ReportesController {
    @RequestMapping(value = "/reporteDependenciaProceso", method = RequestMethod.POST)
    public ModelAndView reporteDependencia(ModelAndView modelAndView,@ModelAttribute("dependenciaInstancia")@Valid Instancia instancia,BindingResult result) {
 		if(result.hasErrors()){
-			return new ModelAndView("reporteUbigeoProceso");
+			return new ModelAndView("reporteDependenciaProceso");
 		}
 		JRDataSource datasource=instanciaService.reporteDependenciaInstancia(instancia);
-	   	Map<String,Object> parameterMap = new HashMap<String,Object>();
-		parameterMap.put("datasource", datasource);
-		modelAndView = new ModelAndView("pdfReportDependencia", parameterMap);
+		if(datasource!=null){
+			Map<String,Object> parameterMap = new HashMap<String,Object>();
+			parameterMap.put("datasource", datasource);
+			modelAndView = new ModelAndView("pdfReportDependencia", parameterMap);
+		}else{
+			modelAndView = new ModelAndView("reporteDependenciaProceso");
+    		modelAndView.addObject("error", "No se encontraron Resultados");
+		}
+	   	
 		return modelAndView;
    	}
    

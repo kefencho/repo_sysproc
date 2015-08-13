@@ -39,7 +39,7 @@
 										Judicial</span></a></li>
 							<li><a href='registrarUsuario.htm'><span>Personal</span></a></li>
 						</ul></li>
-					<li><a href='contactenos.jsp'><span>Cont&#225;ctenos</span></a></li>
+					<li><a href='construccion.htm'><span>Cont&#225;ctenos</span></a></li>
 				</ul>
 			</div>
 			<!-- FIN css Menu -->

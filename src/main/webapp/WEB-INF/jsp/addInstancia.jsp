@@ -72,7 +72,7 @@
 	<form:input readonly="true" path="id.proceso.nroExpediente" class="input_one" />
 </li>
 <li><label class="label">Órgano Judicial:</label>
-	<form:select id="idOrganoJudicial" path=""  class="combo_uno">
+	<form:select id="idOrganoJudicial" path="id.dependencia.organojudicial.idOrganojudicial"  class="combo_uno">
 		<form:option value="0">----Elija Órgano Judicial----</form:option>
 		<form:options items="${organosJudiciales}" itemLabel="denominacion" itemValue="idOrganojudicial" />
 	</form:select>

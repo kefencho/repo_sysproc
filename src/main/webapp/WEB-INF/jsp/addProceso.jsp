@@ -213,17 +213,15 @@ $(function() {
 									<form:errors id="nroexpedienteErrors" name="nroexpedienteErrors" path="nroExpediente" />
 								</font>
 							</li>
-
 							<li><label class="label">Tipo de Naturaleza:</label> 
-								<form:select id="idNaturaleza" path="" class="combo_uno">
+								<form:select id="idNaturaleza" path="materia.naturaleza.idNaturaleza" class="combo_uno">
 									<form:option value="0">----Seleccione Naturaleza----</form:option>
 									<form:options items="${tipoNaturaleza}" itemLabel="denominacion" itemValue="idNaturaleza" />
 								</form:select>
 							</li>
 							<form:hidden id="naturalezaId" path="materia.naturaleza.idNaturaleza"/>
 							<li><label class="label">Tipo de Materia:</label> 
-								<form:select id="idMateria" path="materia.idMateria" class="combo_uno">
-								</form:select>
+								<form:select id="idMateria" path="materia.idMateria" class="combo_uno" />
 								<font color="#FF0000">
 									<form:errors id="materiaErrors" name="materiaErrors" path="materia" />
 								</font>
@@ -354,14 +352,7 @@ $(function() {
 		</div>
 	</form:form>	
 		<!-- FIN Cuerpo -->
-		<div id="contenedorFooter">
-			<div class="piePagina" align="center">
-				<p>
-					Direcci&oacute;n: Jr. Asamblea Nro. 2xx (Entel)- Ayacucho <br>
-					Telf: 066-310000 | <a href="http://www.ppra.gob.pe" target="_parent">www.procuraduria-ayacucho.gob.pe</a> | Copyright &copy; SysProc - 2012
-				</p>
-			</div>
-		</div>
+		<jsp:include page="/WEB-INF/pie/pie.jsp" />
 		<!-- FIN footer -->
 	</div>
 	<!-- FIN Contenedor PRINCIPAL -->

@@ -26,7 +26,7 @@
 <ol>
 <form:hidden path="idDemandante"/>
 <li><label>Número Expediente:</label>
-	<form:input path="proceso.nroExpediente" maxlength="30" class="input_one"/>
+	<form:input id="nroExpediente" path="proceso.nroExpediente" maxlength="30" class="input_one"/>
 	<font color="#FF0000">
 		<form:errors id="procesoErrors" name="procesoErrors" path="proceso" />
 	</font>
@@ -39,7 +39,7 @@
 </li>
 </ol>
 <p align="center">
-	<input type="button" onclick="location.href='<c:url value="/demandadoList.htm"/>'" value="Cancelar" class="btn_asignar" />
+	<input type="button" onclick="location.href='<c:url value="/demandanteList.htm?nroExpedienteActual="/>'" value="Cancelar" class="btn_asignar" />
 	<input type="submit" value="Guardar" class="btn_guardar"/>
 </p>
 </fieldset>
