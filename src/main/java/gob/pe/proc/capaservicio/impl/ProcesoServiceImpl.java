@@ -22,6 +22,7 @@ public class ProcesoServiceImpl implements ProcesoService {
 	@Autowired
 	private ProcesoDAO procesoDAO;
 	
+
 	public Set<Proceso> obtenerListaProceso(Proceso proceso) {
 		return procesoDAO.obtenerListaProceso(proceso);
 	}
