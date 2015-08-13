@@ -90,7 +90,7 @@
 
 						<c:choose>
 							<c:when test="${opcionSeleccionada == 1}">
-							alert("ENTRO1");
+							
 								<table border="0">
 									<tr>
 										<th><display:table id="results" name="listaProcesoLitigantes" requestURI="/inicio.htm" pagesize="10" defaultsort="1" defaultorder="ascending">
@@ -162,7 +162,7 @@
 								</table>
 							</c:when>
 							<c:when test="${opcionSeleccionada == 2}">
-								alert("ENTRO2");
+								
 								<table border="0" align="center">
 									<tr>
 										<td>&nbsp;</td>
@@ -225,7 +225,7 @@
 								</table>
 							</c:when>
 							<c:when test="${opcionSeleccionada == 3}">
-							alert("ENTRO3");
+							
 								<table border="0" align="center">
 									<tr>
 										<td>&nbsp;</td>
@@ -297,7 +297,7 @@
 								</table>
 							</c:when>
 							<c:when test="${opcionSeleccionada == 4}">
-							alert("ENTRO4");
+							
 								<table border="0" align="center">
 									<tr>
 										<td>&nbsp;</td>
@@ -360,7 +360,7 @@
 								</table>
 							</c:when>
 							<c:when test="${opcionSeleccionada == 5}">
-							alert("ENTRO5");
+							
 								<table border="0" align="center">
 									<tr>
 										<td>&nbsp;</td>
