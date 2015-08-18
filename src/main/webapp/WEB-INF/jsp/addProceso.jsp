@@ -45,7 +45,11 @@
 			source: "<c:out value='${pageContext. request. contextPath}'/>/obtener_lista_demandante.htm"
 		});
 		
-		$("#datepicker").datepicker().datepicker("setDate", new Date());
+		var fechaInicioProceso = "<c:out value='${procesoGuardar.fechaInicio}' />";
+
+		if(fechaInicioProceso==null || fechaInicioProceso==""){
+			$("#datepicker").datepicker().datepicker("setDate", new Date());
+		}
 	});
 	
 	function transformarMinuscuaMayuscula(e, elemento) {
@@ -87,10 +91,11 @@ $(document).ready(function() {
       if (isCheckedSentencia) {
     	  $("#txtAreaSentencia").prop("disabled", false);
     	  $("#datepicker1").datepicker("option", "disabled", false);
-
+    	  $("#datepicker1").datepicker().datepicker("setDate", new Date());
       } else {
     	  $("#txtAreaSentencia").prop("disabled", true);
     	  $("#datepicker1").datepicker("option", "disabled", true);
+    	  $("#datepicker1").datepicker().datepicker("setDate", "");
       }
   });
 });
@@ -277,6 +282,8 @@ $(function() {
 							</li>
 							<li><label class="label">Sentencia:</label> 
 								<form:textarea id="txtAreaSentencia" path="sentencia" cols="10" rows="5" class="input_one" disabled="true"/>
+								<font color="#FF0000">
+								<form:errors id="sentenciaErrors" name="sentenciaErrors" path="sentencia" /></font>
 							</li>
 
 										

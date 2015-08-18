@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import gob.pe.proc.capaacccesodatos.EstadoDAO;
 import gob.pe.proc.capaacccesodatos.ProcesoDAO;
 import gob.pe.proc.capadatos.Estado;
 import gob.pe.proc.capadatos.Materia;
@@ -21,6 +22,8 @@ import gob.pe.proc.capaservicio.ProcesoService;
 public class ProcesoServiceImpl implements ProcesoService {
 	@Autowired
 	private ProcesoDAO procesoDAO;
+	@Autowired
+	private EstadoDAO estadoDAO;
 	
 
 	public Set<Proceso> obtenerListaProceso(Proceso proceso) {
@@ -30,6 +33,10 @@ public class ProcesoServiceImpl implements ProcesoService {
 		return procesoDAO.obtenerProcesoporID(nroExpediente);
 	}
 	public void guardarProceso(Proceso proceso) {
+		if(proceso.getSentencia()!=null && !proceso.getSentencia().equalsIgnoreCase("")){
+			Estado estadoConcluido=estadoDAO.obtenerEstado(2);
+			proceso.setEstado(estadoConcluido);
+		}
 		procesoDAO.guardarProceso(proceso);
 
 

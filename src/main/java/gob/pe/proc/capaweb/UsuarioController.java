@@ -101,7 +101,7 @@ public class UsuarioController {
 	}
 	@RequestMapping(value="/login.htm")
 	public void loginUsuario() {
-
+		logger.info("Se ingreso al controlador del Login");
 	}
 	@RequestMapping(value="/accesoDenegado.htm")
 	public void accesoDenegadoUsuario() {
@@ -179,6 +179,7 @@ public class UsuarioController {
 	
 	@RequestMapping("/logout.htm")
 	public String logoutUsuario(Model model){
+		logger.info("Se termino la session de SysProc");
 		return "redirect:j_spring_security_logout";
 	}
 	

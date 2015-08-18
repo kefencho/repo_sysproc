@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -31,7 +31,11 @@
 			buttonImage: "images/calendar.gif",
 			buttonImageOnly: true
 		});
-		$("#datepicker").datepicker().datepicker("setDate", new Date());
+		var fechaIngresoNotificacion = "<c:out value='${notificacionGuardar.fechaIngreso}' />";
+
+		if(fechaIngresoNotificacion==null || fechaIngresoNotificacion==""){
+			$("#datepicker").datepicker().datepicker("setDate", new Date());
+		}
 	});
 	
 	$(function() {
@@ -41,7 +45,11 @@
 			buttonImage: "images/calendar.gif",
 			buttonImageOnly: true
 		});
-		$("#datepicker_dos").datepicker().datepicker("setDate", new Date());
+		var fechaResolucionNotificacion = "<c:out value='${notificacionGuardar.fechaResolucion}' />";
+
+		if(fechaResolucionNotificacion==null || fechaResolucionNotificacion==""){
+			$("#datepicker_dos").datepicker().datepicker("setDate", new Date());
+		}
 	});
 	
 	function transformarMinuscuaMayuscula(e, elemento) {
@@ -149,7 +157,17 @@
 								<th align="left"><label class="label"></label></th>
 								<th align="left">
 									<p align="center">
-										<input type="button" onclick="location.href='<c:url value="/inicio.htm"/>'" value="Cancelar" class="btn_asignar" />
+										<c:if test="${not empty notificacionGuardar.nroNotificacion}">
+											<c:url var="listaNotificacionExpediente" value="busquedaNotificacion.htm">
+												<c:param name="numExpediente" value="${notificacionGuardar.proceso.nroExpediente}" />
+											</c:url>
+											<input type="button" onclick="location.href='<c:out value="${listaNotificacionExpediente}"/>'" value="Cancelar" class="btn_asignar" />
+										</c:if>
+										
+										<c:if test="${empty notificacionGuardar.nroNotificacion}">
+											<input type="button" onclick="location.href='<c:url value="/inicio.htm"/>'" value="Cancelar" class="btn_asignar" />
+										</c:if>
+										
 										<input type="submit" value="Guardar" class="btn_guardar" />
 									</p>
 								</th>

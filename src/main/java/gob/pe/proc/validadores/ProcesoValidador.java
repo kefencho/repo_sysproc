@@ -73,11 +73,24 @@ public class ProcesoValidador implements Validator {
 		if(proceso.getNuevoDemandante().size()==0){
 			errors.rejectValue("demandante", "proceso.demandante.obligatorio");
 		}
-		if(proceso.getFechaFin()!=null && proceso.getFechaFin().before(proceso.getFechaInicio())){
-			errors.rejectValue("fechaFin", "proceso.fechaFin.valido");
-		}
 
+		if(!proceso.getSentencia().equalsIgnoreCase("")){
+			if(proceso.getSentencia().length()>50){
+				errors.rejectValue("sentencia", "proceso.sentencia.tamanio");
+			}
+			
+			if(proceso.getFechaFin()==null){
+				errors.rejectValue("fechaFin", "proceso.fechafin.obligatorio");
+			}else if(proceso.getFechaFin().before(proceso.getFechaInicio())){
+				errors.rejectValue("fechaFin", "proceso.fechafin.valido");
+			}
+		}
 		
+		if(proceso.getFechaFin()!=null){
+			if(proceso.getSentencia().equalsIgnoreCase("")){
+				errors.rejectValue("sentencia", "proceso.sentencia.valido");
+			}
+		}
 	}
 
 }

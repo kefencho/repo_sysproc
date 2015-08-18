@@ -64,7 +64,7 @@
 						<br>
 						<div>
 							<fieldset id="formFielset">
-								<label id="label_titulo_pestanas">Buscar Expediente</label>
+								<label id="label_titulo_pestanas">Buscar Notificación</label>
 							</fieldset>
 						</div>
 						

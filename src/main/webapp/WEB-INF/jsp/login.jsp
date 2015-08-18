@@ -14,7 +14,9 @@
 	    	<input type='text' name='j_username' class='username' placeholder='Usuario' />
 	    	<input type='password' name='j_password' class='password' placeholder='Contraseña'>
 	    	 <c:if test="${not empty param.error}">
-					<span>Error vuelva a intentarlo<em></em></span>
+	    	 	<font color="#FF0000">
+					<span></br>Error vuelva a intentarlo<em></em></span>
+				</font>
 			</c:if>
 			<p align="center">
 				<input name="submit" type="submit" value="Ingresar">
@@ -24,10 +26,14 @@
 	    </form>
 	    <c:if test="${not empty param.info}">						
 			<c:if test="${param.info eq 1}">
-				<p>Sesi&oacute;n Finalizada Correctamente</p>
+				<font color="#FF0000">
+					<p></br>Sesi&oacute;n Finalizada Correctamente</p>
+				</font>
 			</c:if>			
 			<c:if test="${param.info eq 2}">
-				<p>Tu sesi&oacute;n ha expirado, por favor, inicia la sesi&oacute;n nuevamente.</p>
+				<font color="#FF0000">
+					<p></br>Tu sesi&oacute;n ha expirado, por favor, inicia la sesi&oacute;n nuevamente.</p>
+				</font>
 			</c:if>		
 		</c:if>
 	 </div>

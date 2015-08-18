@@ -32,7 +32,11 @@
 			buttonImage: "images/calendar.gif",
 			buttonImageOnly: true
 		});
-		$("#datepicker").datepicker().datepicker("setDate", new Date());
+		var fechaCambioInstancia = "<c:out value='${instanciaGuardar.fechaCambio}' />";
+
+		if(fechaCambioInstancia==null || fechaCambioInstancia==""){
+			$("#datepicker").datepicker().datepicker("setDate", new Date());
+		}
 	});
 	</script>
 <!-- Fin Archivos para calendario -->

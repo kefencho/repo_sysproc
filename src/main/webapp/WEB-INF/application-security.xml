@@ -24,7 +24,7 @@
 	    	logout-url="/j_spring_security_logout"
 	    	/>
 	    	
-	    <security:session-management invalid-session-url="/login.htm?info=1" />
+	    <security:session-management invalid-session-url="/login.htm?info=2" />
 	</security:http>
 	<bean id="adminUserService" class="gob.pe.proc.capaservicio.impl.UsuarioServiceImpl"/>
  	<security:authentication-manager>
