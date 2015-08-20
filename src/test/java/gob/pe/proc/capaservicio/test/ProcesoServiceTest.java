@@ -73,7 +73,7 @@ public class ProcesoServiceTest {
 	@Test
 	public void guardarProcesoTest(){
 		procesoService.guardarProceso(proceso);
-		verify(estadoDAO,times(1)).obtenerEstado(2);
+		verify(estadoDAO,times(2)).obtenerEstado(2);
 		verify(procesoDAO,times(1)).guardarProceso(proceso);
 	}
 	
