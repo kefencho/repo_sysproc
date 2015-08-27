@@ -45,6 +45,9 @@ public class ProcesoValidador implements Validator {
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "anio", "proceso.anio.obligatorio");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cuaderno", "proceso.cuaderno.obligatorio");
 		
+		if(proceso.getMateria().getNaturaleza().getIdNaturaleza()==0){
+			errors.rejectValue("materia.naturaleza", "proceso.naturaleza.obligatorio");
+		}
 		
 		
 		if(proceso.getAnio()!=null){
@@ -74,7 +77,7 @@ public class ProcesoValidador implements Validator {
 			errors.rejectValue("demandante", "proceso.demandante.obligatorio");
 		}
 
-		if(!proceso.getSentencia().equalsIgnoreCase("")){
+		if(proceso.getSentencia()!=null && !proceso.getSentencia().equalsIgnoreCase("")){
 			if(proceso.getSentencia().length()>50){
 				errors.rejectValue("sentencia", "proceso.sentencia.tamanio");
 			}

@@ -4,6 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
 <html>
@@ -174,6 +175,19 @@ $(function() {
 	});
 
 });
+
+function mostrarMensajeValidacion(idField,mensaje){
+	var idFormateadoField='#'+idField;
+	$(idFormateadoField).attr('title', mensaje);
+	$(idFormateadoField).tooltip({
+		position: {
+			my:'left center',
+			at:'right+10 center',
+		    fadeInSpeed:400
+	      }
+	 }).tooltip( "open" );
+	
+}
 </script>
 </head>
 <body>
@@ -214,44 +228,72 @@ $(function() {
 								<big>-</big>
 								<form:input id="nroexpedienteSiete" path="componenteSieteNroExpediente" maxlength="1" size="1" class="input_exp_siete" />
 								<br/>
-								<font color="#FF0000">
-									<form:errors id="nroexpedienteErrors" name="nroexpedienteErrors" path="nroExpediente" />
-								</font>
+								<spring:bind path="nroExpediente">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('nroexpedienteSiete',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							<li><label class="label">Tipo de Naturaleza:</label> 
 								<form:select id="idNaturaleza" path="materia.naturaleza.idNaturaleza" class="combo_uno">
 									<form:option value="0">----Seleccione Naturaleza----</form:option>
 									<form:options items="${tipoNaturaleza}" itemLabel="denominacion" itemValue="idNaturaleza" />
 								</form:select>
+								<spring:bind path="materia.naturaleza">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('idNaturaleza',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							<form:hidden id="naturalezaId" path="materia.naturaleza.idNaturaleza"/>
 							<li><label class="label">Tipo de Materia:</label> 
 								<form:select id="idMateria" path="materia.idMateria" class="combo_uno" />
-								<font color="#FF0000">
-									<form:errors id="materiaErrors" name="materiaErrors" path="materia" />
-								</font>
+								<spring:bind path="materia">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('idMateria',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 
 							<li><label class="label">Tipo de Estado:</label> 
-								<form:select path="estado.idEstado" id="mostrarEstado" class="combo_uno">
-		
+								<form:select path="estado.idEstado" id="mostrarEstado" class="combo_uno">		
 									<form:options items="${tipoEstado}" itemLabel="denominacion" itemValue="idEstado" id="estado" />
 								</form:select>
-								<font color="#FF0000">
-									<form:errors id="estadoErrors" name="estadoErrors" path="estado" />
-								</font>
+								<spring:bind path="estado">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('mostrarEstado',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							
 							<li><label class="label">Año:</label> 
 								<form:input id="anio" name="anio" path="anio" maxlength="4" class="input_exp_uno"/> 
 								<input name="btn_asignar" type="button" onclick="doAjaxPost();" value="Asignar Folder" class="btn_nuevo_expediente">
-								<font color="#FF0000">
-								<form:errors id="anioErrors" name="anioErrors" path="anio" /></font>
+								<spring:bind path="anio">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('anio',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							<li><label class="label">Número de Folder:</label> 
 								<form:input readonly="true" id="numfolder" name="numfolder"  path="nroFolder" class="input_one" /> 
-								<font color="#FF0000">
-								<form:errors id="numfolderErrors" name="numfolderErrors" path="nroFolder" /></font>
+								<spring:bind path="nroFolder">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('numfolder',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 
 							<li><label class="label">Cuantia:</label> 
@@ -262,14 +304,25 @@ $(function() {
 								<form:textarea path="pretension" cols="10" rows="5" class="input_one"/>
 							</li>
 							
-							<li><label class="label">Fecha de Inicio:</label> <%--<form:input path="fechaInicio"/><br>--%>
+							<li><label class="label">Fecha de Inicio:</label>
 								<form:input id="datepicker" maxlength="10" path="fechaInicio" class="input_date" />
-								<font color="#FF0000">
-								<form:errors id="fechaInicioErrors" name="fechaInicioErrors" path="fechaInicio" /></font>
+								<spring:bind path="fechaInicio">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('datepicker',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							<li><label class="label">Cuaderno:</label> 
-								<form:input path="cuaderno" maxlength="1" class="input_numero"/>
-								<font color="#FF0000"><form:errors id="cuadernoErrors" name="cuadernoErrors" path="cuaderno" /></font>
+								<form:input id="idCuaderno" path="cuaderno" maxlength="1" class="input_numero"/>
+								<spring:bind path="cuaderno">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('idCuaderno',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							<li>
 								<form:checkbox id="chBoxSetencia" path="" value="true"  />
@@ -277,13 +330,23 @@ $(function() {
 							</li>
 							<li><label class="label">Fecha de Fin:</label> 
 								<form:input id="datepicker1" maxlength="10" path="fechaFin" class="input_date_dos"  /> 
-								<font color="#FF0000">
-								<form:errors id="fechaFinErrors" name="fechaFinErrors" path="fechaFin" /></font>
+								<spring:bind path="fechaFin">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('datepicker1',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 							<li><label class="label">Sentencia:</label> 
 								<form:textarea id="txtAreaSentencia" path="sentencia" cols="10" rows="5" class="input_one" disabled="true"/>
-								<font color="#FF0000">
-								<form:errors id="sentenciaErrors" name="sentenciaErrors" path="sentencia" /></font>
+								<spring:bind path="sentencia">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('txtAreaSentencia',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 							</li>
 
 										
@@ -301,13 +364,17 @@ $(function() {
 												</th>
 											</tr>
 											<tbody>
-												<font color="#FF0000"><form:errors id="demandadoErrors" name="demandadoErrors" path="demandado" /></font>
+												<spring:bind path="demandado">								
+													<c:if test="${status.error}">
+														<script type="text/javascript">										
+															mostrarMensajeValidacion('idNuevoDemandado',"<c:out value='${status.errorMessage}'/>");
+														</script>										
+													</c:if>								
+												</spring:bind>
 												<c:if test="${not empty procesoGuardar.nuevoDemandado}">
 													<c:forEach items="${procesoGuardar.nuevoDemandado}" var="demandados" varStatus="status">
 														<input type="hidden" name="nuevoDemandado[<c:out value="${status.index}" />].idDemandado" value="<c:out value="${demandados.idDemandado}" />" class="input_one" />
 														<tr>
-<%-- 															<td align="center"><c:out value="${status.count}" /></td> --%>
-<%-- 															<td><input type="hidden" name="nuevoDemandado[<c:out value="${status.index}" />].proceso.nroExpediente" value="<c:out value="${demandados.proceso.nroExpediente}" />" class="input_one" /></td> --%>
 															<td class="label"><c:out value="${status.count}" /> <input name="nuevoDemandado[<c:out value="${status.index}" />].denominacion" value="<c:out value="${demandados.denominacion}" />" class="input_one" /></td>
 														</tr>
 													</c:forEach>
@@ -327,13 +394,17 @@ $(function() {
 												<th><input type="button" id="agregarDemandante" value="Agregar" class="btn_guardar" /></th>
 											</tr>
 											<tbody>
-												<font color="#FF0000"><form:errors id="demandanteErrors" name="demandanteErrors" path="demandante" /></font>
+												<spring:bind path="demandante">								
+													<c:if test="${status.error}">
+														<script type="text/javascript">										
+															mostrarMensajeValidacion('idNuevoDemandante',"<c:out value='${status.errorMessage}'/>");
+														</script>										
+													</c:if>								
+												</spring:bind>
 												<c:if test="${not empty procesoGuardar.nuevoDemandante}">
 													<c:forEach items="${procesoGuardar.nuevoDemandante}" var="demandantes" varStatus="status">
 														<input type="hidden" name="nuevoDemandante[<c:out value="${status.index}" />].idDemandante" value="<c:out value="${demandantes.idDemandante}" />" />
 														<tr>
-<%-- 															<td align="center"><c:out value="${status.count}" /></td> --%>
-<%-- 															<td><input type="hidden" name="nuevoDemandante[<c:out value="${status.index}" />].proceso.nroExpediente" value="<c:out value="${demandantes.proceso.nroExpediente}" />" class="input_one" /></td> --%>
 															<td class="label"><c:out value="${status.count}" /> <input name="nuevoDemandante[<c:out value="${status.index}" />].denominacion" value="<c:out value="${demandantes.denominacion}" />"  class="input_one" /></td>
 														</tr>
 													</c:forEach>

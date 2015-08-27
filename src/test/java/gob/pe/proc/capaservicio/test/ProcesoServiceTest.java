@@ -1,6 +1,5 @@
 package gob.pe.proc.capaservicio.test;
 
-import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.util.HashSet;
@@ -12,7 +11,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.internal.verification.Times;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import gob.pe.proc.capaacccesodatos.EstadoDAO;
@@ -73,7 +71,7 @@ public class ProcesoServiceTest {
 	@Test
 	public void guardarProcesoTest(){
 		procesoService.guardarProceso(proceso);
-		verify(estadoDAO,times(2)).obtenerEstado(2);
+		verify(estadoDAO,times(1)).obtenerEstado(2);
 		verify(procesoDAO,times(1)).guardarProceso(proceso);
 	}
 	
