@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,6 +23,7 @@
 	<script src="script/ui/jquery.ui.core.js"></script>
 	<script src="script/ui/jquery.ui.widget.js"></script>
 	<script src="script/ui/jquery.ui.datepicker.js"></script>
+	<script type="text/javascript" src="script/ui/minified/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="css/formularios/demos.css">
 	<script>
 	$(function() {
@@ -56,7 +58,19 @@
 		tecla=(document.all) ? e.keyCode : e.which; 
 		 elemento.value = elemento.value.toUpperCase();
 		}
-
+	
+	function mostrarMensajeValidacion(idField,mensaje){
+		var idFormateadoField='#'+idField;
+		$(idFormateadoField).attr('title', mensaje);
+		$(idFormateadoField).tooltip({
+			position: {
+				my:'left center',
+				at:'right+10 center',
+			    fadeInSpeed:400
+		      }
+		 }).tooltip( "open" );
+		
+	}
 	</script>
 <!-- Fin Archivos para calendario -->
 
@@ -89,10 +103,14 @@
 							<tr>
 								<th align="left"><label class="label">Número de	Expediente:</label></th>
 								<th align="left">
-								<form:input path="proceso.nroExpediente" readonly="true" class="input_one" />
-								<font color="#FF0000">
-									<form:errors id="procesoErrors" name="procesoErrors" path="proceso.nroExpediente" />
-								</font>
+								<form:input id="idNroExpediente" path="proceso.nroExpediente" readonly="true" class="input_one" />
+								<spring:bind path="proceso.nroExpediente">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('idNroExpediente',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 								</th>
 							</tr>
 							<tr>
@@ -107,50 +125,74 @@
 									<form:input id="nronotificacionCuatro" path="componenteCuatroNroNotificacion" maxlength="2" size="2" class="input_notif_cuatro" onkeyup="transformarMinuscuaMayuscula(event, this)" onblur="transformarMinuscuaMayuscula(event, this)"/>
 									
 									<br/>
-								<font color="#FF0000">
-									<form:errors id="nroNotificacionErrors" name="nroNotificacionErrors" path="nroNotificacion" />
-								</font>
+									<spring:bind path="nroNotificacion">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('nronotificacionCuatro',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Fecha de	Ingreso:</label></th>
 								<th align="left">
 									<form:input path="fechaIngreso"	id="datepicker" maxlength="10" class="input_date" />
-									<font color="#FF0000">
-										<form:errors id="fechaIngresoErrors" name="fechaIngresoErrors" path="fechaIngreso" />
-									</font>
+									<spring:bind path="fechaIngreso">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('datepicker',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Número de	Resolución:</label></th>
-								<th align="left"><form:input path="nroResolucion" maxlength="2" class="input_numero" />
-									<font color="#FF0000">
-										<form:errors id="nroResolucionErrors" name="nroResolucionErrors" path="nroResolucion" />
-									</font>		
+								<th align="left"><form:input id="idNroResolucion" path="nroResolucion" maxlength="2" class="input_numero" />
+									<spring:bind path="nroResolucion">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('idNroResolucion',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>		
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Fecha de	Resolución:</label></th>
 								<th align="left"><form:input path="fechaResolucion" id="datepicker_dos" maxlength="10" class="input_date" />
-								<font color="#FF0000">
-									<form:errors id="fechaResolucionErrors" name="fechaResolucionErrors" path="fechaResolucion" />
-								</font>	
+								<spring:bind path="fechaResolucion">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('datepicker_dos',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+								</spring:bind>	
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Número de	Fojas:</label></th>
-								<th align="left"><form:input path="nroFojas" class="input_numero" maxlength="3" />
-								<font color="#FF0000">
-									<form:errors id="nroFojasErrors" name="nroFojasErrors" path="nroFojas"  />
-								</font>
+								<th align="left"><form:input id="idNroFojas" path="nroFojas" class="input_numero" maxlength="3" />
+								<spring:bind path="nroFojas">								
+									<c:if test="${status.error}">
+										<script type="text/javascript">										
+											mostrarMensajeValidacion('idNroFojas',"<c:out value='${status.errorMessage}'/>");
+										</script>										
+									</c:if>								
+								</spring:bind>
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Anexo:</label></th>
-								<th align="left"><form:textarea cols="10" rows="5" path="anexo" class="input_observacion" />
-								<font color="#FF0000">
-									<form:errors id="anexoErrors" name="anexoErrors" path="anexo" />
-								</font>
+								<th align="left"><form:textarea id="idAnexo" cols="10" rows="5" path="anexo" class="input_observacion" />
+								<spring:bind path="anexo">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('idAnexo',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+								</spring:bind>
 								</th>
 							</tr>
 							<tr>

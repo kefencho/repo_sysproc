@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="security" %>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -22,6 +23,7 @@
 	<script src="script/ui/jquery.ui.core.js"></script>
 	<script src="script/ui/jquery.ui.widget.js"></script>
 	<script src="script/ui/jquery.ui.datepicker.js"></script>
+	<script type="text/javascript" src="script/ui/minified/jquery-ui.min.js"></script>
 	<link rel="stylesheet" href="css/formularios/demos.css">
 <!-- fin fechas -->
 <script type="text/javascript">
@@ -34,6 +36,18 @@ $(function() {
 		});
 		$("#datepicker").datepicker().datepicker("setDate", new Date());
 	});
+function mostrarMensajeValidacion(idField,mensaje){
+	var idFormateadoField='#'+idField;
+	$(idFormateadoField).attr('title', mensaje);
+	$(idFormateadoField).tooltip({
+		position: {
+			my:'left center',
+			at:'right+10 center',
+		    fadeInSpeed:400
+	      }
+	 }).tooltip( "open" );
+	
+}
 </script>
 <title>Asignar Carga Laboral</title>
 
@@ -66,16 +80,19 @@ $(function() {
 									<label class="label">Número Expediente</label>
 								</th>
 								<th align="left">
-									<form:input path="id.proceso.nroExpediente" readonly="true" class="input_one" />
-									<font color="#FF0000">
-										<form:errors id="nroExpedienteErrors" name="nroExpedienteErrors" path="id.proceso.nroExpediente" />
-									</font>
+									<form:input id="idNroExpediente" path="id.proceso.nroExpediente" readonly="true" class="input_one" />
+									<spring:bind path="id.proceso.nroExpediente">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('idNroExpediente',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Abogado</label></th>
-								<th align="left"><form:select path="id.usuario.dni"
-										class="combo_uno">
+								<th align="left"><form:select id="idCboAbogado" path="id.usuario.dni" class="combo_uno">
 										<option value="0">Seleccione Abogado</option>
 										<c:forEach var="abogado" items="${abogados}">
 											<form:option value="${abogado.dni}">
@@ -83,9 +100,13 @@ $(function() {
 											</form:option>
 										</c:forEach>
 									</form:select>
-								<font color="#FF0000">
-									<form:errors id="usuarioErrors" name="usuarioErrors" path="usuario" />
-								</font>
+									<spring:bind path="id.usuario.dni">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('idCboAbogado',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>
 								</th>
 							</tr>
 							<tr>
@@ -94,18 +115,26 @@ $(function() {
 								</th>
 								<th align="left">
 									<form:input path="fechaAsignado" id="datepicker" maxlength="10" class="input_date" />
-									<font color="#FF0000">
-										<form:errors id="fechaAsignadoErrors" name="fechaAsignadoErrors" path="fechaAsignado" />
-									</font>
+									<spring:bind path="fechaAsignado">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('datepicker',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>
 								</th>
 							</tr>
 							<tr>
 								<th align="left"><label class="label">Observacion</label></th>
 								<th align="left">
-									<form:textarea path="observacion" cols="10" rows="5"	class="input_observacion" />
-									<font color="#FF0000">
-										<form:errors id="observacionErrors" name="observacionErrors" path="observacion" />
-									</font>
+									<form:textarea id="idObservacion" path="observacion" cols="10" rows="5"	class="input_observacion" />
+									<spring:bind path="fechaAsignado">								
+										<c:if test="${status.error}">
+											<script type="text/javascript">										
+												mostrarMensajeValidacion('datepicker',"<c:out value='${status.errorMessage}'/>");
+											</script>										
+										</c:if>								
+									</spring:bind>
 								</th>
 							</tr>
 							<tr>
