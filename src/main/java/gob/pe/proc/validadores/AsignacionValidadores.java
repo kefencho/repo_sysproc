@@ -14,10 +14,15 @@ public class AsignacionValidadores implements Validator {
 
 	
 	public void validate(Object target, Errors errors) {
+		Asignado asignado = (Asignado)target;
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id.proceso.nroExpediente", "asignacion.nroExpediente.obligatorio");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "id.usuario.dni", "asignacion.usuario.obligatorio");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "fechaAsignado", "asignacion.fechaAsignado.obligatorio");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "observacion", "asignacion.observacion.obligatorio");
+		
+		if(asignado.getId().getUsuario().getDni().equals("0")){
+			errors.rejectValue("id.usuario.dni", "asignacion.usuario.obligatorio");
+		}
 	}
 
 }

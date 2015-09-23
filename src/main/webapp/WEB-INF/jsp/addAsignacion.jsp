@@ -128,10 +128,10 @@ function mostrarMensajeValidacion(idField,mensaje){
 								<th align="left"><label class="label">Observacion</label></th>
 								<th align="left">
 									<form:textarea id="idObservacion" path="observacion" cols="10" rows="5"	class="input_observacion" />
-									<spring:bind path="fechaAsignado">								
+									<spring:bind path="observacion">								
 										<c:if test="${status.error}">
 											<script type="text/javascript">										
-												mostrarMensajeValidacion('datepicker',"<c:out value='${status.errorMessage}'/>");
+												mostrarMensajeValidacion('idObservacion',"<c:out value='${status.errorMessage}'/>");
 											</script>										
 										</c:if>								
 									</spring:bind>

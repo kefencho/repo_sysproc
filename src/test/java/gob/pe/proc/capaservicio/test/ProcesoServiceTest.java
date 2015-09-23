@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.springframework.util.CollectionUtils;
 
 import gob.pe.proc.capaacccesodatos.EstadoDAO;
 import gob.pe.proc.capaacccesodatos.ProcesoDAO;
@@ -58,7 +59,7 @@ public class ProcesoServiceTest {
 		Set<Proceso> todosLosProceso=procesoService.obtenerListaProceso(proceso);
 		
 		Assert.assertNotNull(todosLosProceso);
-		Assert.assertTrue(todosLosProceso.size()>0);
+		Assert.assertFalse(CollectionUtils.isEmpty(todosLosProceso));
 	}
 	
 	@Test
